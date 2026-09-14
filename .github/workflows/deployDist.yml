@@ -1,8 +1,15 @@
 name: Deploy Distribution
 # on: [push,workflow_dispatch
 on:
-  push:
-  workflow_dispatch:
+    push:
+        branches:
+            - main
+            - feature/*
+        paths-ignore:
+            - 'README.md'
+            - 'docs/**'
+            - '.github/**'
+    workflow_dispatch:
 
 jobs:
   test:
