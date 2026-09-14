@@ -37,7 +37,7 @@ jobs:
         run: npm ci
       - name: Run tests 
         run: npm test
-  deploy:
+  build:
     needs: test
     runs-on: ubuntu-latest
     steps:
@@ -56,5 +56,18 @@ jobs:
         run: npm ci
       - name: Build the distribution
         run: npm run build
+      - name: Upload distribution artifacts
+        uses: actions/upload-artifact@v3  #search this at github marketplace
+        with:
+          name: dist-artifacts
+          path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download distribution artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-artifacts
       - name: Deploy to GitHub Pages
         run: echo "Deploy successful..."
