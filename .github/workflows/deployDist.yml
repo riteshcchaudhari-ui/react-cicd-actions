@@ -44,11 +44,11 @@ jobs:
       - name: Get the code
         uses: actions/checkout@v7
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v7
         with:
           node-version: '20'
       - name: Cache Node.js modules
-        uses: actions/cache@v3
+        uses: actions/cache@v6
         with:
             path: ~/.npm
             key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -57,7 +57,7 @@ jobs:
       - name: Build the distribution
         run: npm run build
       - name: Upload distribution artifacts
-        uses: actions/upload-artifact@v3  #search this at github marketplace
+        uses: actions/upload-artifact@v7  #search this at github marketplace
         with:
           name: dist-artifacts
           path: dist
@@ -66,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download distribution artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v7
         with:
           name: dist-artifacts
       - name: Deploy to GitHub Pages
