@@ -3,7 +3,7 @@ name: Deploy Distribution
 on:
     push:
         branches:
-            - main
+            - master
             - feature/*
         paths-ignore:
             - 'README.md'
